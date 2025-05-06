@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Folder as FolderIcon } from "lucide-react";
-import React from "react";
+import { ArrowRight, FolderIcon } from "lucide-react";
 import Folder from "./folder";
 import { useQueryData } from "@/hooks/useQueryData";
 import { getWorkspaceFolders } from "@/actions/workspace";
@@ -13,26 +12,36 @@ type Props = {
 
 export type FolderProps = {
   status: number;
-  data: ({
-    _count: {
-      videos: number;
-    };
-  } & {
-    id: string;
-    name: string;
-    workSpaceId: string | null;
-  })[];
+  data: {
+    isFolders: ({
+      _count: {
+        videos: number;
+      };
+    } & {
+      id: string;
+      name: string;
+      workSpaceId: string | null;
+    })[];
+  };
 };
 
 const Folders = ({ workspaceId }: Props) => {
   const { data, isFetched } = useQueryData(["workspace-folders"], () =>
     getWorkspaceFolders(workspaceId)
   );
-  const { latestVarables } = useMutationdataState(["create-folder"]);
-  const { status, data: folders } = data as FolderProps;
-  // if (isFetched && folders) {
 
-  // }
+  const { latestVarables } = useMutationdataState(["create-folder"]);
+
+  // Safely access the data
+  const responseData = data as FolderProps | undefined;
+  const status = responseData?.status || 404;
+
+  // The key fix: correctly access the isFolders array
+  const foldersList = responseData?.data?.isFolders || [];
+
+  console.log("Response data:", responseData);
+  console.log("Folders list:", foldersList);
+
   return (
     <div className="flex flex-col gap-4 ">
       <div className="flex items-center justify-between ">
@@ -62,14 +71,15 @@ const Folders = ({ workspaceId }: Props) => {
                 optimistic
               />
             )}
-            {folders.map((folder) => (
-              <Folder
-                name={folder.name}
-                count={folder._count.videos}
-                id={folder.id}
-                key={folder.id}
-              />
-            ))}
+            {Array.isArray(foldersList) &&
+              foldersList.map((folder) => (
+                <Folder
+                  name={folder.name}
+                  count={folder._count.videos}
+                  id={folder.id}
+                  key={folder.id}
+                />
+              ))}
           </>
         )}
       </section>

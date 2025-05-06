@@ -29,11 +29,12 @@
   --neutral-600: #525252;
   --neutral-700: #404040;
   --neutral-800: #262626;
+  --neutral-850: #1a1a1a; /* Added for sidebar */
   --neutral-900: #171717;
   --neutral-950: #0a0a0a;
 
   /* Semantic UI Colors */
-  --background: var(--neutral-900);
+  --background: #0f0f0f; /* Darker background from image */
   --foreground: #ffffff;
 
   --card: var(--neutral-800);
@@ -66,10 +67,10 @@
   --info-foreground: #ffffff;
 
   /* Surface and borders */
-  --surface-1: var(--neutral-900);
-  --surface-2: var(--neutral-800);
-  --surface-3: var(--neutral-700);
-  --border: var(--neutral-700);
+  --surface-1: #0f0f0f; /* Darker surface from image */
+  --surface-2: var(--neutral-850);
+  --surface-3: var(--neutral-800);
+  --border: #2a2a2a; /* Slightly lighter border from image */
   --border-light: var(--neutral-600);
   --border-dark: var(--neutral-800);
   --input: var(--neutral-700);
@@ -91,14 +92,14 @@
   --chart-8: #8b5cf6; /* Violet */
 
   /* Sidebar */
-  --sidebar: var(--neutral-850, #1a1a1a);
+  --sidebar: #151515; /* Darker sidebar from image */
   --sidebar-foreground: #ffffff;
   --sidebar-muted: var(--neutral-500);
   --sidebar-primary: var(--purple-600);
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: var(--neutral-700);
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: var(--neutral-700);
+  --sidebar-border: #2a2a2a; /* Matching border color */
   --sidebar-ring: var(--purple-600);
 }
 
@@ -193,9 +194,9 @@
 .snippet--gradient {
   background-image: linear-gradient(
     to bottom,
-    rgba(23, 23, 23, 0),
-    rgba(23, 23, 23, 0.8),
-    rgba(23, 23, 23, 1)
+    rgba(15, 15, 15, 0),
+    rgba(15, 15, 15, 0.8),
+    rgba(15, 15, 15, 1)
   );
 }
 

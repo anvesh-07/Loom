@@ -24,46 +24,49 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))", // This matches your --background
-        foreground: "hsl(var(--foreground))", // This matches your --foreground
+        background: "#0f0f0f", // Darker background from image
+        foreground: "#ffffff",
+
         primary: {
-          DEFAULT: "hsl(var(--primary))", // Primary color for buttons, links, etc.
-          foreground: "hsl(var(--primary-foreground))", // Foreground text color for primary
+          DEFAULT: "#9333ea", // Purple from image
+          foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))", // Secondary color
-          foreground: "hsl(var(--secondary-foreground))", // Foreground color for secondary
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))", // Danger or alert color
+          DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))", // Muted background color
-          foreground: "hsl(var(--muted-foreground))", // Muted text color
+          DEFAULT: "#2a2a2a", // Muted color from image
+          foreground: "#a3a3a3", // Muted text color from image
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))", // Accent color
-          foreground: "hsl(var(--accent-foreground))", // Accent foreground color
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))", // Popover background color
-          foreground: "hsl(var(--popover-foreground))", // Popover text color
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))", // Card background color
-          foreground: "hsl(var(--card-foreground))", // Card text color
+          DEFAULT: "#1a1a1a", // Card background from image
+          foreground: "#ffffff",
         },
         sidebar: {
-          DEFAULT: "hsl(var(--sidebar))", // Sidebar background color
-          foreground: "hsl(var(--sidebar-foreground))", // Sidebar text color
-          primary: "hsl(var(--sidebar-primary))", // Primary sidebar color
-          primaryForeground: "hsl(var(--sidebar-primary-foreground))", // Sidebar text in primary section
-          accent: "hsl(var(--sidebar-accent))", // Sidebar accent color
-          accentForeground: "hsl(var(--sidebar-accent-foreground))", // Sidebar accent text color
-          border: "hsl(var(--sidebar-border))", // Sidebar border color
-          ring: "hsl(var(--sidebar-ring))", // Sidebar ring (focus) color
+          DEFAULT: "#151515", // Sidebar background from image
+          foreground: "#ffffff",
+          primary: "#9333ea", // Primary sidebar color
+          primaryForeground: "#ffffff",
+          accent: "#2a2a2a", // Sidebar accent color
+          accentForeground: "#ffffff",
+          border: "#2a2a2a", // Sidebar border color
+          ring: "#9333ea", // Sidebar ring color
         },
+        // Custom colors from the image
+        "neutral-850": "#1a1a1a", // Added for folder backgrounds
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
@@ -5,7 +6,7 @@ import { Folder as FolderIcon } from "lucide-react";
 
 import React, { useRef, useState } from "react";
 import Loader from "../loader";
-import { useMutationData } from "@/hooks/useMutationData";
+import { useMutationData, useMutationdataState } from "@/hooks/useMutationData";
 import { renameFolder } from "@/actions/workspace";
 import { Input } from "@/components/ui/input";
 
@@ -32,6 +33,7 @@ const Folder = ({ name, id, optimistic, count }: Props) => {
     "workspace-folders",
     Renamed
   );
+  const { latestVarables } = useMutationdataState(["rename-folders"]);
 
   const handleFolderClick = () => {
     router.push(`${pathName}/folder/${id}`);
@@ -43,7 +45,7 @@ const Folder = ({ name, id, optimistic, count }: Props) => {
   const updateFolderName = (e: React.FocusEvent<HTMLInputElement>) => {
     if (inputRef.current && folderCardRef.current) {
       if (inputRef.current.value) {
-        mutate({ name: inputRef.current.value });
+        mutate({ name: inputRef.current.value, id });
       } else Renamed();
     }
   };
@@ -74,7 +76,11 @@ const Folder = ({ name, id, optimistic, count }: Props) => {
               className="text-neutral-300"
               onDoubleClick={handleNameDoubleClick}
             >
-              {name}
+              {latestVarables &&
+              latestVarables.status === "pending" &&
+              latestVarables.variables.id === id
+                ? latestVarables.variables.name
+                : name}
             </p>
           )}
           <span className="text-sm text-neutral-500">{count || 0} videos</span>
