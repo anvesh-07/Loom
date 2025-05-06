@@ -2,20 +2,242 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === Enhanced Color Design System === */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --radius: 0.625rem;
+
+  /* Core palette - Main theme colors */
+  --purple-50: #faf5ff;
+  --purple-100: #f3e8ff;
+  --purple-200: #e9d5ff;
+  --purple-300: #d8b4fe;
+  --purple-400: #c084fc;
+  --purple-500: #a855f7;
+  --purple-600: #9333ea; /* Primary accent */
+  --purple-700: #7e22ce;
+  --purple-800: #6b21a8;
+  --purple-900: #581c87;
+  --purple-950: #3b0764;
+
+  /* Neutral palette - Expanded grays */
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+  --neutral-950: #0a0a0a;
+
+  /* Semantic UI Colors */
+  --background: var(--neutral-900);
+  --foreground: #ffffff;
+
+  --card: var(--neutral-800);
+  --card-foreground: #ffffff;
+
+  --popover: var(--neutral-800);
+  --popover-foreground: #ffffff;
+
+  --primary: var(--purple-600);
+  --primary-light: var(--purple-500);
+  --primary-dark: var(--purple-700);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--neutral-900);
+
+  --muted: var(--neutral-700);
+  --muted-foreground: var(--neutral-400);
+
+  --accent: var(--neutral-700);
+  --accent-foreground: #ffffff;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --success: #10b981;
+  --success-foreground: #ffffff;
+  --warning: #f59e0b;
+  --warning-foreground: #ffffff;
+  --info: #3b82f6;
+  --info-foreground: #ffffff;
+
+  /* Surface and borders */
+  --surface-1: var(--neutral-900);
+  --surface-2: var(--neutral-800);
+  --surface-3: var(--neutral-700);
+  --border: var(--neutral-700);
+  --border-light: var(--neutral-600);
+  --border-dark: var(--neutral-800);
+  --input: var(--neutral-700);
+  --ring: var(--purple-600);
+
+  /* State colors */
+  --hover: rgba(147, 51, 234, 0.08);
+  --focus: rgba(147, 51, 234, 0.2);
+  --active: rgba(147, 51, 234, 0.12);
+
+  /* Chart colors - Expanded for better data visualization */
+  --chart-1: var(--purple-600);
+  --chart-2: var(--info);
+  --chart-3: var(--success);
+  --chart-4: var(--warning);
+  --chart-5: var(--destructive);
+  --chart-6: #ec4899; /* Pink */
+  --chart-7: #06b6d4; /* Cyan */
+  --chart-8: #8b5cf6; /* Violet */
+
+  /* Sidebar */
+  --sidebar: var(--neutral-850, #1a1a1a);
+  --sidebar-foreground: #ffffff;
+  --sidebar-muted: var(--neutral-500);
+  --sidebar-primary: var(--purple-600);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--neutral-700);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: var(--neutral-700);
+  --sidebar-ring: var(--purple-600);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Optional Light Mode Theme */
+.light-theme {
+  --background: var(--neutral-50);
+  --foreground: #000000;
+
+  --card: var(--neutral-100);
+  --card-foreground: #000000;
+
+  --popover: var(--neutral-100);
+  --popover-foreground: #000000;
+
+  --primary: var(--purple-600);
+  --primary-light: var(--purple-500);
+  --primary-dark: var(--purple-700);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--neutral-800);
+  --secondary-foreground: #ffffff;
+
+  --muted: var(--neutral-200);
+  --muted-foreground: var(--neutral-600);
+
+  --accent: var(--neutral-300);
+  --accent-foreground: #000000;
+
+  --border: var(--neutral-300);
+  --border-light: var(--neutral-200);
+  --border-dark: var(--neutral-400);
+  --input: var(--neutral-300);
+
+  --surface-1: var(--neutral-50);
+  --surface-2: var(--neutral-100);
+  --surface-3: var(--neutral-200);
+
+  --hover: rgba(147, 51, 234, 0.08);
+  --focus: rgba(147, 51, 234, 0.2);
+  --active: rgba(147, 51, 234, 0.12);
+
+  --sidebar: var(--neutral-100);
+  --sidebar-foreground: #000000;
+  --sidebar-muted: var(--neutral-500);
+  --sidebar-border: var(--neutral-300);
+}
+
+/* Apply colors globally */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Text selection color */
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* === Utility Extensions === */
+
+.fade-layer {
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.fade-layer--side {
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 20%);
+}
+
+.text-radial {
+  background-image: radial-gradient(
+    ellipse farthest-side,
+    rgba(147, 51, 234, 0.3) 20%,
+    transparent 85%
+  );
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.snippet--gradient {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(23, 23, 23, 0),
+    rgba(23, 23, 23, 0.8),
+    rgba(23, 23, 23, 1)
+  );
+}
+
+.shadow-subtle {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 4px 6px rgba(0, 0, 0, 0.15),
+    0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-prominent {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus ring for accessibility */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+}
+
+/* Animation */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
