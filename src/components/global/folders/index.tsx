@@ -5,6 +5,8 @@ import Folder from "./folder";
 import { useQueryData } from "@/hooks/useQueryData";
 import { getWorkspaceFolders } from "@/actions/workspace";
 import { useMutationdataState } from "@/hooks/useMutationData";
+import { useDispatch } from "react-redux";
+import { FOLDERS } from "@/redux/slices/folders";
 
 type Props = {
   workspaceId: string;
@@ -26,21 +28,21 @@ export type FolderProps = {
 };
 
 const Folders = ({ workspaceId }: Props) => {
+  const despatch = useDispatch();
   const { data, isFetched } = useQueryData(["workspace-folders"], () =>
     getWorkspaceFolders(workspaceId)
   );
 
   const { latestVarables } = useMutationdataState(["create-folder"]);
 
-  // Safely access the data
   const responseData = data as FolderProps | undefined;
-  const status = responseData?.status || 404;
 
-  // The key fix: correctly access the isFolders array
   const foldersList = responseData?.data?.isFolders || [];
+  const { status, data: folders } = data as FolderProps;
 
-  console.log("Response data:", responseData);
-  console.log("Folders list:", foldersList);
+  if (isFetched && folders) {
+    despatch(FOLDERS({ folders: folders.isFolders }));
+  }
 
   return (
     <div className="flex flex-col gap-4 ">

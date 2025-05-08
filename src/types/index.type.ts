@@ -36,3 +36,23 @@ export type FolderProps = {
     };
   };
 };
+
+export type VideoProps = {
+  status: number;
+  data: {
+    User: {
+      firstname: string | null;
+      lastname: string | null;
+      image: string | null;
+    } | null;
+    id: string;
+    processing: string;
+    Folder: {
+      id: string;
+      name: string;
+    } | null;
+    createdAt: string;
+    title: string;
+    source: string;
+  }[];
+};

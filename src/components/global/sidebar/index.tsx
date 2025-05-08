@@ -27,6 +27,8 @@ import Loader from "../loader";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import InfoBar from "../Info-bar";
 import { useQueryData } from "@/hooks/useQueryData";
+import { useDispatch } from "react-redux";
+import { WORKSPACES } from "@/redux/slices/workspaces";
 
 type Props = {
   actionWorkspaceId: string;
@@ -37,6 +39,7 @@ const Sidebar = ({ actionWorkspaceId }: Props) => {
   const pathName = usePathname();
   const { data, isFetched } = useQueryData(["user-workspaces"], getWorkspace);
   const { data: workspace } = data as WorkspaceProps;
+  const dispatch = useDispatch();
   const { data: notifications } = useQueryData(
     ["user-notifications"],
     getNotifications
@@ -49,6 +52,9 @@ const Sidebar = ({ actionWorkspaceId }: Props) => {
   const onChangeActiveWorkspce = (value: string) => {
     router.push(`/dashboard/${value}`);
   };
+  if (isFetched && workspace) {
+    dispatch(WORKSPACES({ workspaces: workspace.workspace }));
+  }
   const SidebarSection = (
     <>
       <div className="bg-[#111111] float-none relative p-4 h-full w-[250px] flex flex-col gap-4 items-center overflow-hidden ">
